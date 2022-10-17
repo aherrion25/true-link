@@ -13,6 +13,8 @@ import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
+
+import HomePage from '../HomePage/HomePage';
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
@@ -59,6 +61,13 @@ function App() {
           >
             <UserPage />
           </ProtectedRoute>
+          
+          
+          <ProtectedRoute
+          // logged in shows HomePage else shows LoginPage
+          exact path="/home">
+            <HomePage />
+          </ProtectedRoute>
 
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
@@ -103,7 +112,7 @@ function App() {
             {user.id ?
               // If the user is already logged in, 
               // redirect them to the /user page
-              <Redirect to="/user" />
+              <Redirect to="/home" />
               :
               // Otherwise, show the Landing page
               <LandingPage />

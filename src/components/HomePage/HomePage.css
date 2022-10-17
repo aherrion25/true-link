@@ -1,0 +1,149 @@
+* {
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+    color: black;
+    font-family: tahoma;
+  }
+  
+  .familytree ul {
+    padding-top: 20px;
+    position: relative;
+  }
+  
+  /* Make all children "inline" */
+  .familytree li {
+    /*float: left;*/
+    display: inline-block;
+    text-align: center;
+    list-style-type: none;
+    position: relative;
+    padding: 20px 5px 0 5px;
+  }
+  
+  /* Add horizontal connector. Note: they are 2 pseudo-elements */
+  .familytree li::before, .familytree li::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 50%;
+    width: 55%;
+    height: 42px;
+    z-index: -1;
+    border-top: 1px solid #CCC;
+  }
+  
+  .familytree li::after {
+    border-left: 1px solid #CCC;
+    left: 50%;
+    right: auto;
+  }
+  
+  /* Remove left and right connector from a single child */
+  .familytree li:only-child::after, .familytree li:only-child::before {
+    display: none;
+  }
+  
+  .familytree li:only-child {
+    padding-top: 0;
+  }
+  
+  /* Remove "outer" connector */
+  .familytree li:first-child::before, .familytree li:last-child::after {
+    border: 0 none;
+  }
+  /* Add back the down connector for last node */
+  .familytree li:last-child::before {
+    border-right: 1px solid #CCC;
+    border-radius: 0 5px 0 0;
+  }
+  
+  /* Add curve line to the first child's connector */
+  .familytree li:first-child::after {
+    border-radius: 5px 0 0 0;
+  }
+  
+  
+  /* Add down connector from parent */
+  .familytree ul ul::before {
+    content: '';
+    border-left: 1px solid #CCC;
+    z-index: -1;
+    height: 20px;
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    width: 0;
+  }
+  
+  /* Add cosmetic for each item */
+  .familytree li a {
+    font-size: 12px;
+    background-color: white;
+    border: 1px solid #CCC;
+    padding: 5px 10px;
+    height: 14px;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 4px;
+  }
+  
+  /* Change bg-color while hovering each item */
+  .familytree li a:hover {
+    background-color: #EEF;
+  }
+  
+  /* EXPERIMENTAL for multiple parents */
+  /* Add margin for the parents */
+  .familytree li a:not(:only-of-type) {
+    position: relative;
+    margin-bottom: 16px;
+  }
+  
+  /* Add "down" connector (vertical line) from each multi-parent, EXCEPT the last one */
+  .familytree li > a:not(:last-of-type)::after{
+    content: '';
+    position: absolute;
+    border-left: 1px solid #CCC;
+    border-bottom: 1px solid #CCC;
+    top: 20px;
+    width: 75%;
+    height: 20px;
+    left: 50%;
+    z-index: -1;
+  }
+  
+  /* Special case for the last multiple-parent, using border-right */
+  .familytree li > a:not(:only-of-type):last-of-type::after {
+    content: '';
+    position: absolute;
+    border-right: 1px solid #CCC;
+    border-bottom: 1px solid #CCC;
+    top: 20px;
+    width: 50%;
+    height: 20px;
+    right: 50%;
+    z-index: -1; 
+    border-bottom-right-radius: 5px;
+  }
+  
+  /* Give the curve line to the first multiple parent .... */
+  .familytree li > a:not(:only-of-type):first-child::after {
+    border-bottom-left-radius: 5px;
+  }
+  
+  /* The middle element of multi-parents*/
+  .familytree li > a:not(:first-child):not(:last-of-type)::before {
+    content: '';
+    position: absolute;
+    border-bottom: 1px solid #CCC;
+    top: 40px;
+    width: 50%;
+    right: 50%;
+    z-index: -1;
+  }
+  
+  .items ul:last-of-type li {
+    padding-left: 0;
+    padding-right: 0;
+  }

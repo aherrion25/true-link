@@ -34,6 +34,16 @@ CREATE TABLE "connection_type" (
     "id" SERIAL PRIMARY KEY,
     "type" VARCHAR (50)
 );
+
+------------------[ DATA ]----------------
+
 -- Values for each connection type
 INSERT INTO "connection_type"("type")
 VALUES('Father'),('Mother'),('Child'),('Spouse');
+
+-- Starter data for person table
+INSERT INTO "person" ( "firstname", "lastname", "lastname_birth", "gender", "birth", "death", "birthplace", "user_id")
+VALUES('Aubree', 'Herrion', 'Herrion', 'Male', '02/12/1992',NULL ,'Norfolk,VA',2),
+('Melissa', 'Staupe', 'Staupe', 'Female', '02/17/1985',NULL ,'Burnsville,MN',2),
+('Knox', 'Staupe', 'Staupe', 'Male', '10/12/2019',NULL , 'Burnsville,MN',2);
+

@@ -1,10 +1,12 @@
 import {useState, useEffect} from 'react';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import './HomePage.css'
 import Icon from '@mui/material/Icon';
 import Container  from '@mui/material/Container';
 import Button  from '@mui/material/Button';
 import axios from 'axios';
+
 
 
 
@@ -44,8 +46,8 @@ useEffect(() => {
                 <li className='parent'>
                 {
                 familytree.map(tree => (
-                <a href="#">{tree.firstname}  {tree.lastname}</a>
-
+                <Link treeId={tree.id} className='detailsLink' to="/details">{tree.firstname}  {tree.lastname} {tree.id}</Link>
+                
 
                 ))
             }
@@ -57,7 +59,7 @@ useEffect(() => {
                     {
                 familytree && familytree.length > 0 && familytree[0].children.map(tree => (
             <li className='child'>
-                <a href="#">{tree.firstname}  {tree.lastname}</a>
+                <Link className='detailsLink' to="/details">{tree.firstname}  {tree.lastname}</Link>
             </li>
 
 

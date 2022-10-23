@@ -11,6 +11,17 @@ function* fetchTree() {
     }
 }
 
+function* fetchDetails() {
+    // get details from DB
+    try {
+        const details = yield axios.get('/api/tree');
+        yield put({ type: 'SET_DETAILS', payload: details.data});
+    } catch (error) {
+        console.log('ERROR fetching details', error);
+        alert('STOP! SOMETHING WENT WRONG!')
+    }
+}
+
 // CREATE
 function* addMember(action) {
     try {
@@ -24,6 +35,7 @@ function* addMember(action) {
 function* familySaga() {
     yield takeLatest('FETCH_FAMILY_TREE', fetchTree);
     yield takeLatest('ADD_MEMBER', addMember);
+    yield takeLatest('SET_DETAILS', fetchDetails)
 }
 
 export default familySaga;

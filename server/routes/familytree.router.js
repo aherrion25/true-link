@@ -29,6 +29,21 @@ router.get('/', async (req, res) => {
 
 });
 
+router.get('/:id',(req,res) => {
+    if (req.isAuthenticated()) {
+        const personId = req.params.id
+        const queryText = `SELECT * FROM "person" WHERE "id"= $1`;
+        pool.query(queryText,[personId]).then(() => {
+            res.sendStatus(201);
+        }).catch((error) => {
+            res.sendStatus(500)
+        })
+      } else {
+        res.sendStatus(403)
+      }
+})
+
+
 /**
  * POST route template
  */
@@ -49,3 +64,4 @@ router.post('/', (req, res) => {
 });
 
 module.exports = router;
+

@@ -69,7 +69,7 @@ function App() {
           exact path="/home">
             <HomePage />
           </ProtectedRoute>
-          <ProtectedRoute exact path="/details">
+          <ProtectedRoute exact path="/details/:id">
             <DetailsPage />
           </ProtectedRoute>
 

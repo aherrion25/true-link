@@ -25,7 +25,7 @@ function* fetchDetails() {
 // CREATE
 function* addMember(action) {
     try {
-        yield axios.post('/api/tree', )
+        yield axios.post(`/api/tree/${action.payload}`, )
         yield put({type : 'FETCH_FAMILY_TREE'})
     } catch (error) {
         console.log('ERROR IN POST FAMILY TREE');

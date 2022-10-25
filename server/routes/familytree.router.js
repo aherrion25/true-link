@@ -56,9 +56,20 @@ router.get('/:id',(req,res) => {
 router.post('/', (req, res) => {
   // POST route code here
   if (req.isAuthenticated()) {
+    const newPerson = req.body;
     const queryText = `INSERT INTO "person" ("firstname", "lastname", "lastname_birth", "gender", "birth", "death", "birthpalace", "user_id" )
                         VALUES ($1,$2,$3,$4,$5,$6,$7,$8)`;
-    pool.query(queryText[req.body.firstname, req.body.lastname,req.body.lastname_birth,req.body.gender,req.body.birth,req.body.death,req.body.birthplace,req.user.id])
+    const queryValues = [
+      newPerson.firstname,
+      newPerson.lastname,
+      newPerson.lastname_birth,
+      newPerson.gender,
+      newPerson.birth,
+      newPerson.death,
+      newPerson.birthplace
+
+    ]
+    pool.query(queryText,queryValues[req.user.id])
     .then(() => {
         res.sendStatus(201);
     }).catch((error) => {

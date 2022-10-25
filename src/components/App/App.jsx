@@ -22,6 +22,7 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import DetailsPage from '../DetailsPage/DetailsPage';
+import AddPerson from '../AddPerson/AddPerson';
 
 import './App.css';
 
@@ -72,6 +73,10 @@ function App() {
           <ProtectedRoute exact path="/details/:id">
             <DetailsPage />
           </ProtectedRoute>
+          <ProtectedRoute exact path="/add-person">
+            <AddPerson />
+          </ProtectedRoute>
+
 
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage

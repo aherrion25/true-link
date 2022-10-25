@@ -37,11 +37,9 @@ useEffect(() => {
             <Container fixed>
             ADD Family Member
             <br />
-            <a href='#'><Icon>add_circle</Icon></a>
+            <Link className='addPersonLink' to={'/add-person'}><Icon>add_circle</Icon></Link>
             <br />
-            <pre>{JSON.stringify(familytree)}</pre>
-            
-               
+        
                     <div className='items'>
             <ul>
                 <li className='parent'>

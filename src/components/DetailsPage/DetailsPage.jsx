@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import Card from '@mui/material/Card';
@@ -64,7 +65,7 @@ function DetailsPage(){
                     </Typography>
                     <Typography>
                     Date of Death: {
-                            personDetail.death && formatBirthdate(
+                            personDetail.death && formatDeathdate(
                                 (personDetail.death)
                             )
                         }
@@ -76,7 +77,7 @@ function DetailsPage(){
                     </Typography>
                     <CardActions>
                         <Box display="flex" justifyContent="flex-end" alignItems="flex-end" >
-                            <Button variant="contained">Edit</Button>
+                            <Button variant="contained"><Link>Edit</Link></Button>
                         </Box>
                     </CardActions>
                 </CardContent>

@@ -45,7 +45,7 @@ useEffect(() => {
                 <li className='parent'>
                 {
                 familytree.map(tree => (
-                <Link treeId={tree.id} className='detailsLink' to={`/details/${tree.id}`}>{tree.firstname}  {tree.lastname}</Link>
+                <Link className='detailsLink' to={`/details/${tree.id}`}>{tree.firstname}  {tree.lastname}</Link>
                 
 
                 ))

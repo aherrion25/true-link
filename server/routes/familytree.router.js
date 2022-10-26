@@ -49,6 +49,8 @@ router.get('/:id',(req,res) => {
     }
 });
 
+// router.get('/connection/:id', (req))
+
 
 /**
  * POST route template
@@ -57,22 +59,26 @@ router.post('/', (req, res) => {
   // POST route code here
   if (req.isAuthenticated()) {
     const newPerson = req.body;
-    const queryText = `INSERT INTO "person" ("firstname", "lastname", "lastname_birth", "gender", "birth", "death", "birthpalace", "user_id" )
-                        VALUES ($1,$2,$3,$4,$5,$6,$7,$8)`;
+    console.log(req.user);
+    console.log(req.body);
+    const queryText = `INSERT INTO "person" ("firstname", "lastname", "lastname_birth", "gender", "birth", "death", "birthplace", "user_id" )
+                        VALUES ($1,$2,$3,$4,$5,$6,$7,$8);`;
     const queryValues = [
       newPerson.firstname,
       newPerson.lastname,
       newPerson.lastname_birth,
       newPerson.gender,
       newPerson.birth,
-      newPerson.death,
-      newPerson.birthplace
-
+      newPerson.death === ''? null : newPerson.death,
+      newPerson.birthplace,
+      req.user.id
     ]
-    pool.query(queryText,queryValues[req.user.id])
+    pool.query(queryText,queryValues)
     .then(() => {
+      // 2nd query 
         res.sendStatus(201);
     }).catch((error) => {
+        console.log(error);
         res.sendStatus(500);
     })
   } else {

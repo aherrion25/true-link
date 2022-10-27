@@ -11,20 +11,33 @@ import axios from 'axios';
 
 
 
+
+
 function HomePage() {
 const [familytree, setFamilyTree] = useState([])
+const [allTree, setAllTree] = useState([])
 const history = useHistory();
 
 useEffect(() => {
-    fetchTree()
+    fetchTree(),
+    fetchAllTree()
 },[]);
 
  const fetchTree = () => {
-    axios.get('/api/tree').then((response) => {
+    axios.get('/api/tree/').then((response) => {
         setFamilyTree((response.data))
     }). catch ((error) => {
         console.log('error in GET Family Tree', error);
-        alert('something wen wrong')
+        alert('something went wrong')
+    })
+ }
+
+ const fetchAllTree = () => {
+    axios.get('/api/all').then((response) =>{
+        setAllTree((response.data))
+    } ).catch ((error) => {
+        console.log('error in GET all', error)
+        alert('something went wrong')
     })
  }
  
@@ -64,10 +77,24 @@ useEffect(() => {
 
                 ))
             }
+            
                     
                 </ul>
                 </li>
             </ul>
+             
+
+                    </div>
+                    <div>
+                        <ul>
+                            <li className='alltree'>
+                            {
+                                allTree.map(all => (
+                                    <Link className='detailsLink' to={`/details/${all.id}`}>{all.firstname}  {all.lastname}</Link>
+                                ))
+                            }
+                            </li>
+                        </ul>
                     </div>
                
            

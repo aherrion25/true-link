@@ -13,10 +13,12 @@ import  Box  from '@mui/material/Box';
 function DetailsPage(){
     // const person = useSelector(store => store.selectPerson);
     const [personDetail, setPersonDetail ] = useState({});
+    const [connection, setConnection] = useState([]);
     const { id } = useParams();
 
     useEffect(() => {
         fetchDetails()
+        fetchConnection()
     },[id]);
     // formats birthdate
     const formatBirthdate = (birth) => {
@@ -35,6 +37,16 @@ function DetailsPage(){
            setPersonDetail((response.data))
         }). catch ((error) => {
             console.log('error in GET Family Tree details', error);
+            alert('something went wrong')
+        })
+     }
+
+     const fetchConnection = () => {
+        axios.get(`api/tree/connection/${id}`).then((response) =>{
+            setConnection((response.data))
+
+        }).catch((error) => {
+            console.log('error in GET connection',error);
             alert('something went wrong')
         })
      }
@@ -71,13 +83,20 @@ function DetailsPage(){
                         }
                         
                     </Typography>
-
+                        
                     <Typography>
                         Birth Place: {personDetail.birthplace}
                     </Typography>
+                    <Typography>
+                        Connections: {
+                            connection.map(connections =>(
+                                <p>{connections.firstname} is the  {connections.type} of {personDetail.firstname}</p>
+                            ))
+                        }
+                    </Typography>
                     <CardActions>
                         <Box display="flex" justifyContent="flex-end" alignItems="flex-end" >
-                            <Button variant="contained"><Link>Edit</Link></Button>
+                            <Button variant="contained"><Link to={`/edit/${personDetail.id}`}>Edit</Link></Button>
                         </Box>
                     </CardActions>
                 </CardContent>

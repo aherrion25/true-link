@@ -70,12 +70,19 @@ function App() {
           exact path="/home">
             <HomePage />
           </ProtectedRoute>
+
           <ProtectedRoute exact path="/details/:id">
             <DetailsPage />
           </ProtectedRoute>
+
           <ProtectedRoute exact path="/add-person">
             <AddPerson />
           </ProtectedRoute>
+
+          <ProtectedRoute exact path="/edit/:id">
+            <AddPerson />
+          </ProtectedRoute>
+
 
 
           <ProtectedRoute

@@ -31,6 +31,7 @@ router.get('/', async (req, res) => {
 
 });
 
+// get route for specific person
 router.get('/:id',(req,res) => {
   if (req.isAuthenticated()) {
       const personId = req.params.id
@@ -49,7 +50,21 @@ router.get('/:id',(req,res) => {
     }
 });
 
-// router.get('/connection/:id', (req))
+
+
+router.get('/connection/:id', (req,res) => {
+  if(req.isAuthenticated()) {
+    const queryText = `SELECT "pairing"."id", "connection_type"."type", "person"."firstname", "person"."lastname" FROM "pairing" 
+    JOIN "connection_type" ON "pairing"."connection_type_id" = "connection_type"."id"
+    JOIN "person" ON "person"."id"= "pairing"."connection_id"
+    WHERE "pairing"."person_id"=$1 ;`
+    pool.query(queryText,[req.params.id]).then(results => {
+      res.send(results.rows)
+    }).catch(error => {
+      res.sendStatus(500)
+    })
+  }
+})
 
 
 /**
@@ -61,8 +76,9 @@ router.post('/', (req, res) => {
     const newPerson = req.body;
     console.log(req.user);
     console.log(req.body);
-    const queryText = `INSERT INTO "person" ("firstname", "lastname", "lastname_birth", "gender", "birth", "death", "birthplace", "user_id" )
-                        VALUES ($1,$2,$3,$4,$5,$6,$7,$8);`;
+    const personQueryText = `INSERT INTO "person" ("firstname", "lastname", "lastname_birth", "gender", "birth", "death", "birthplace", "user_id" )
+                        VALUES ($1,$2,$3,$4,$5,$6,$7,$8)
+                        RETURNING "id";`;
     const queryValues = [
       newPerson.firstname,
       newPerson.lastname,
@@ -73,10 +89,23 @@ router.post('/', (req, res) => {
       newPerson.birthplace,
       req.user.id
     ]
-    pool.query(queryText,queryValues)
-    .then(() => {
-      // 2nd query 
-        res.sendStatus(201);
+    pool.query(personQueryText,queryValues)
+    
+    .then( result => {
+      const createdPersonId = result.rows[0].id
+      // 2nd query handles pairing references
+      const pairinigQueryText = `INSERT INTO "pairing" ("person_id","connection_id","connection_type_id")
+                        VALUES($1,$2,$3);`;
+        // Query for adding a pairing for new person
+        pool.query(pairinigQueryText[createdPersonId, req.body.connection_id, req.body.connection_type_id])
+        .then(result => {
+          res.sendStatus(201);
+        }).catch(error => {
+          // catch errors for 2nd query
+          console.log(error);
+          res.sendStatus(500)
+        })
+    // catch errors for 1st query
     }).catch((error) => {
         console.log(error);
         res.sendStatus(500);
@@ -85,6 +114,7 @@ router.post('/', (req, res) => {
     res.sendStatus(403)
   }
 });
+
 
 module.exports = router;
 

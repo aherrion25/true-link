@@ -1,13 +1,32 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch} from "react-redux";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button'
+import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
 import axios from "axios";
+import { useParams } from "react-router-dom";
+
 
 
 const AddPerson = () => {
     const dispatch = useDispatch();
+    const {id} = useParams()
+
+    useEffect(() => {
+        if(id){
+            axios.get(`/api/tree/${id}`).then(response => {
+                const person = response.data;
+                setNewPerson(person.firstname,
+                            person.lastname,
+                            person.lastname_birth,
+                            person.gender,
+                            person.birth,
+                            person.death,
+                            person.birthplace)
+            })
+        }
+    })
     
     const [newPerson, setNewPerson] = useState({
         firstname: "",
@@ -25,20 +44,26 @@ const AddPerson = () => {
 
     const addFamilyMember = (event) => {
         event.preventDefault()
-        dispatch({ type:'ADD_MEMBER', payload: newPerson})
+        if(id){
+            // dispatch({type:'EDIT_PERSON', payload:newPerson.fr )
+        } else {
+            dispatch({ type:'ADD_MEMBER', payload: newPerson}, history)
+        }
+        
         setNewPerson({id:newPerson.id + 1, firstname: '', lastname: '', lastname_birth: '',
     gender: '', birth: '', death: '', birthplace: ''});
     }
     return(
         <Box 
         component="form"
+        display='flexbox'
         sx={{
-            width: '520px',
-            height: '750px',
+            flexGrow: 1,
+            width:'100%',
             border: '2px solid black',
             '& .MuiTextField-root': { m: 1, width: '25ch' },   
         }}>
-            <h3>Add or Edit Family Member</h3>
+            <h3>{id ? 'Edit Family Member' : 'Add Family Member'}</h3>
             <br />
             <form onSubmit={addFamilyMember}>
             <h4>First Name</h4><TextField required id={"firstname"} placeholder="first name" type='text' value={newPerson.firstname} onChange={handleChange('firstname')}  />
@@ -59,6 +84,7 @@ const AddPerson = () => {
                  <Button type="submit" onClick={addFamilyMember} variant="contained">Submit</Button>
             </Box>
             </form>
+
         </Box>
     )
 

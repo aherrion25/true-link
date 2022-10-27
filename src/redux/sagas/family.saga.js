@@ -32,10 +32,23 @@ function* addMember(action) {
     }
 }
 
+// UPDATE
+function* editPerson(action){
+    try{
+        yield axios.put(`/api/tree/${action.payload.id}`, action.payload);
+        if(action.history){
+            action.history.goBack()
+        }
+    } catch( error ){
+        console.log(error);
+    }
+}
+
 function* familySaga() {
     yield takeLatest('FETCH_FAMILY_TREE', fetchTree);
     yield takeLatest('ADD_MEMBER', addMember);
-    yield takeLatest('SET_DETAILS', fetchDetails)
+    yield takeLatest('SET_DETAILS', fetchDetails);
+    yield takeLatest('EDIT_PERSON', editPerson);
 }
 
 export default familySaga;

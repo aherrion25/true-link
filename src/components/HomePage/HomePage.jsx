@@ -52,20 +52,14 @@ useEffect(() => {
             <br />
             <Link className='addPersonLink' to={'/add-person'}><Icon>add_circle</Icon></Link>
             <br />
-        
                     <div className='items'>
             <ul>
                 <li className='parent'>
                 {
                 familytree.map(tree => (
                 <Link className='detailsLink' to={`/details/${tree.id}`}>{tree.firstname}  {tree.lastname}</Link>
-                
-
                 ))
             }
-                   
-                   
-                
                 <ul>
                     
                     {
@@ -73,17 +67,11 @@ useEffect(() => {
             <li className='child'>
                 <Link className='detailsLink' to={`/details/${tree.id}`}>{tree.firstname}  {tree.lastname}</Link>
             </li>
-
-
                 ))
-            }
-            
-                    
+            }     
                 </ul>
                 </li>
             </ul>
-             
-
                     </div>
                     <div>
                         <ul>
@@ -96,10 +84,6 @@ useEffect(() => {
                             </li>
                         </ul>
                     </div>
-               
-           
-            
-
             </Container>
 
         </div>

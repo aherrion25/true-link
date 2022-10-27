@@ -1,3 +1,4 @@
+import { CallToActionOutlined } from '@mui/icons-material';
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
@@ -27,6 +28,9 @@ function* addMember(action) {
     try {
         yield axios.post(`/api/tree`,{firstname: action.payload.firstname,lastname: action.payload.lastname,lastname_birth: action.payload.lastname_birth,gender: action.payload.gender,birth: action.payload.birth,death: action.payload.death,birthplace: action.payload.birthplace} )
         yield put({type : 'FETCH_FAMILY_TREE'})
+        if(action.history){
+            action.history.goBack()
+        }
     } catch (error) {
         console.log('ERROR IN POST FAMILY TREE');
     }

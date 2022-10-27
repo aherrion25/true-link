@@ -92,19 +92,7 @@ router.post('/', (req, res) => {
     pool.query(personQueryText,queryValues)
     
     .then( result => {
-      const createdPersonId = result.rows[0].id
-      // 2nd query handles pairing references
-      const pairinigQueryText = `INSERT INTO "pairing" ("person_id","connection_id","connection_type_id")
-                        VALUES($1,$2,$3);`;
-        // Query for adding a pairing for new person
-        pool.query(pairinigQueryText[createdPersonId, req.body.connection_id, req.body.connection_type_id])
-        .then(result => {
-          res.sendStatus(201);
-        }).catch(error => {
-          // catch errors for 2nd query
-          console.log(error);
-          res.sendStatus(500)
-        })
+      res.sendStatus(201);
     // catch errors for 1st query
     }).catch((error) => {
         console.log(error);
@@ -112,6 +100,45 @@ router.post('/', (req, res) => {
     })
   } else {
     res.sendStatus(403)
+  }
+});
+
+router.post('/connection', (req,res) => {
+  if(req.isAuthenticated){
+  // 2nd query handles pairing references
+  const pairinigQueryText = `INSERT INTO "pairing" ("person_id","connection_id","connection_type_id")
+                    VALUES($1,$2,$3);`;
+    // Query for adding a pairing for new person
+    pool.query(pairinigQueryText[req.body.person_id, req.body.connection_id, req.body.connection_type_id])
+    .then(result => {
+      res.sendStatus(201);
+    }).catch(error => {
+      // catch errors for 2nd query
+      console.log(error);
+      res.sendStatus(500)
+    })
+  }
+});
+
+router.put('/:id', (req, res) => {
+  if(req.isAuthenticated){
+   const queryText = `UPDATE "person" SET "firstname"=$1, "lastname"=$2,"lastname_birth"= $3,
+                      "gender"= $4, "birth"=$5, "death"=$6, "birthplace"=$7
+                      WHERE "id"=$8 AND "user_id"= $9;`;
+  pool.query(queryText,[req.body.firstname, 
+                        req.body.lastname,
+                        req.body.lastname_birth,
+                        req.body.gender,
+                        req.body.birth,
+                        req.body.death,
+                        req.body.birthplace,
+                        req.params.id])
+      .then(results => {
+        res.sendStatus(200)
+      }).catch(error => {
+        console.log(error);
+        res.sendStatus(500)
+      })
   }
 });
 

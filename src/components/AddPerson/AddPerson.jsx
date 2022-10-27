@@ -45,7 +45,7 @@ const AddPerson = () => {
     const addFamilyMember = (event) => {
         event.preventDefault()
         if(id){
-            // dispatch({type:'EDIT_PERSON', payload:newPerson.fr )
+            dispatch({type:'EDIT_PERSON', payload: newPerson}, history)
         } else {
             dispatch({ type:'ADD_MEMBER', payload: newPerson}, history)
         }
@@ -80,6 +80,7 @@ const AddPerson = () => {
             <br/>
             <h4>Birthplace</h4> <TextField required id={"birthplace"} placeholder="Birthplace" type='text' value={newPerson.birthplace} onChange={handleChange('birthplace')} />
             <br />
+            
             <Box display="flex" justifyContent="flex-end" alignItems="flex-end" sx={{margin: '15px'}}>
                  <Button type="submit" onClick={addFamilyMember} variant="contained">Submit</Button>
             </Box>

@@ -3,30 +3,36 @@ import { useDispatch} from "react-redux";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams,useHistory } from "react-router-dom";
 
 
 
 const AddPerson = () => {
     const dispatch = useDispatch();
-    const {id} = useParams()
+    const history = useHistory()
+    const {id} = useParams();
+    // const [firstname, setFirstName] = useState('');
+    // const [lastname, setLastName] = useState('');
+    // const [lastname_birth, setLastNameBirth] = useState('');
+    // const [gender, setGender] = useState('');
+    // const [birth, setBirth] = useState('');
+    // const [death, setDeath] = useState('');
+    // const [birthplace, setBirthPlace] = useState('');
+
 
     useEffect(() => {
         if(id){
             axios.get(`/api/tree/${id}`).then(response => {
                 const person = response.data;
-                setNewPerson(person.firstname,
-                            person.lastname,
-                            person.lastname_birth,
-                            person.gender,
-                            person.birth,
-                            person.death,
-                            person.birthplace)
+                setNewPerson(person)
+   
+            }).catch((error) => {
+                console.log(error);
+                alert('Something went wrong')
             })
         }
-    })
+    },[id])
     
     const [newPerson, setNewPerson] = useState({
         firstname: "",
@@ -45,9 +51,9 @@ const AddPerson = () => {
     const addFamilyMember = (event) => {
         event.preventDefault()
         if(id){
-            dispatch({type:'EDIT_PERSON', payload: newPerson}, history)
+            dispatch({type:'EDIT_PERSON', payload: newPerson, history})
         } else {
-            dispatch({ type:'ADD_MEMBER', payload: newPerson}, history)
+            dispatch({ type:'ADD_MEMBER', payload: newPerson, history})
         }
         
         setNewPerson({id:newPerson.id + 1, firstname: '', lastname: '', lastname_birth: '',

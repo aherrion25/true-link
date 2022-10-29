@@ -13,7 +13,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { grey } from '@mui/material/colors';
+
 
 
 
@@ -93,7 +93,7 @@ useEffect(() => {
                     </div>
                     <div>
                         <TableContainer sx={{margin: '10px'}} component={Paper}>
-                            <Table sx={{minWidth: 300}} size='small'>
+                            <Table sx={{minWidth: 50}} size='small'>
                                 <TableHead>
                                     <TableRow style={{background:'grey'}}>
                                         Name
@@ -104,7 +104,7 @@ useEffect(() => {
                                         
                                             <TableBody>
                                                 <TableCell align='center'>
-                                                    <Link className='detailsLink' to={`/details/${all.id}`}>{all.firstname}  {all.lastname}</Link>
+                                                    <Link  className='allLink' to={`/details/${all.id}`}>{all.firstname}  {all.lastname}</Link>
                                                 </TableCell>
                                             </TableBody>
                                     ))

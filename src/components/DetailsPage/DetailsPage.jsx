@@ -67,9 +67,8 @@ function DetailsPage(){
         })
      }
      // Removes connection
-     const removeConnection = (e) => {
-        e.preventDefault()
-        axios.delete(`/api/tree/connection/${id}`).then((response) => {
+     const removeConnection = (connection_id) => {
+        axios.delete(`/api/tree/connection/${connection_id}`).then((response) => {
             fetchConnection()
         }).catch(e => {
             console.log('error in DELETE connection', e);
@@ -122,7 +121,8 @@ function DetailsPage(){
                     <Typography>
                         Connections: {
                             connection.map(connections =>(
-                                <p>{connections.firstname} is the  {connections.type} of {personDetail.firstname}<Button onClick={removeConnection} type='button' variant='contained' color='error' sx={{padding:'4px', margin:'2px'}}>Remove</Button></p>
+                                <p>{connections.firstname} is the  {connections.type} of {personDetail.firstname}
+                                <Button onClick={() => removeConnection(connections.id)} type='button' variant='contained' color='error' sx={{padding:'4px', margin:'2px'}}>Remove</Button></p>
                                 
                             ))
                         }

@@ -107,9 +107,19 @@ router.post('/connection', (req,res) => {
   if(req.isAuthenticated){
   // 2nd query handles pairing references
   const pairinigQueryText = `INSERT INTO "pairing" ("person_id","connection_id","connection_type_id")
-                    VALUES($1,$2,$3);`;
+                    VALUES($1,$2,$3),($4,$5,$6);`;
     // Query for adding a pairing for new person
-    pool.query(pairinigQueryText[req.body.person_id, req.body.connection_id, req.body.connection_type_id])
+    let connection2 = 4;
+    switch(req.body.connection_type_id){
+      case 1:
+        case 2:
+        connection2= 3
+        break;
+        case 3:
+          connection2= 1
+
+    }
+    pool.query(pairinigQueryText,[req.body.person_id, req.body.connection_id, connection2, req.body.connection_id,req.body.person_id,req.body.connection_type_id])
     .then(result => {
       res.sendStatus(201);
     }).catch(error => {
@@ -145,7 +155,7 @@ router.put('/:id', (req, res) => {
 
 router.delete('/connection/:id', (req,res) => {
   if(req.isAuthenticated){
-    const queryText = 'DELETE from "pairing" WHERE "id"=$1 AND "user_id"=$2;';
+    const queryText = 'DELETE FROM "pairing" WHERE "id"=$1;';
     pool.query(queryText, [req.params.id])
         .then((results) => {
           res.sendStatus(200)

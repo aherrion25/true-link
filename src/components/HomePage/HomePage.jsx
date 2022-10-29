@@ -6,6 +6,14 @@ import Icon from '@mui/material/Icon';
 import Container  from '@mui/material/Container';
 import Button  from '@mui/material/Button';
 import axios from 'axios';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import { grey } from '@mui/material/colors';
 
 
 
@@ -46,20 +54,24 @@ useEffect(() => {
 
 
     return(
-        <div className='familytree'>
+        <div className='items'>
             <Container fixed>
             ADD Family Member
             <br />
             <Link className='addPersonLink' to={'/add-person'}><Icon>add_circle</Icon></Link>
             <br />
-                    <div className='items'>
+        
+                    <div className='familytree'>
             <ul>
                 <li className='parent'>
                 {
                 familytree.map(tree => (
                 <Link className='detailsLink' to={`/details/${tree.id}`}>{tree.firstname}  {tree.lastname}</Link>
+                
+
                 ))
             }
+            
                 <ul>
                     
                     {
@@ -67,23 +79,43 @@ useEffect(() => {
             <li className='child'>
                 <Link className='detailsLink' to={`/details/${tree.id}`}>{tree.firstname}  {tree.lastname}</Link>
             </li>
+
+
                 ))
-            }     
+            }
+            
+                    
                 </ul>
                 </li>
             </ul>
+             
+
                     </div>
                     <div>
-                        <ul>
-                            <li className='alltree'>
-                            {
-                                allTree.map(all => (
-                                    <Link className='detailsLink' to={`/details/${all.id}`}>{all.firstname}  {all.lastname}</Link>
-                                ))
-                            }
-                            </li>
-                        </ul>
+                        <TableContainer sx={{margin: '10px'}} component={Paper}>
+                            <Table sx={{minWidth: 300}} size='small'>
+                                <TableHead>
+                                    <TableRow style={{background:'grey'}}>
+                                        Name
+                                    </TableRow>
+                                </TableHead>
+                                {
+                                    allTree.map(all => (
+                                        
+                                            <TableBody>
+                                                <TableCell align='center'>
+                                                    <Link className='detailsLink' to={`/details/${all.id}`}>{all.firstname}  {all.lastname}</Link>
+                                                </TableCell>
+                                            </TableBody>
+                                    ))
+                                } 
+                            </Table>
+                        </TableContainer>
                     </div>
+               
+           
+            
+
             </Container>
 
         </div>

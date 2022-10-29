@@ -143,6 +143,19 @@ router.put('/:id', (req, res) => {
   }
 });
 
+router.delete('/connection/:id', (req,res) => {
+  if(req.isAuthenticated){
+    const queryText = 'DELETE from "pairing" WHERE "id"=$1 AND "user_id"=$2;';
+    pool.query(queryText, [req.params.id])
+        .then((results) => {
+          res.sendStatus(200)
+        }).catch((error) => {
+          console.log('ERROR IN DELETE', error);
+          res.sendStatus(500)
+        })
+  }
+})
+
 
 module.exports = router;
 

@@ -8,10 +8,11 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import  Box  from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
+import Paper from '@mui/material/Paper';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+
 
 
 function DetailsPage(){
@@ -37,7 +38,7 @@ function DetailsPage(){
         const date = new Date(death);
         return (date.getMonth() + 1) + '/' + date.getDate() + '/' +  date.getFullYear();
       }
-    
+    // GETS details from DB
      const fetchDetails = () => {
         axios.get(`/api/tree/${id}`).then((response) => {
            setPersonDetail((response.data))
@@ -46,7 +47,7 @@ function DetailsPage(){
             alert('something went wrong')
         })
      }
-
+     // GET a connection
      const fetchConnection = () => {
         axios.get(`api/tree/connection/${id}`).then((response) =>{
             setConnection((response.data))
@@ -55,7 +56,7 @@ function DetailsPage(){
             alert('something went wrong')
         })
      }
-
+     // Adds a connection 
      const addConnection = (e) => {
         e.preventDefault()
         axios.post('/api/tree/connection',{person_id:connectionId, connection_id:id, connection_type_id: connectionType}).then((response) => {
@@ -65,19 +66,30 @@ function DetailsPage(){
             alert('something went wrong')
         })
      }
+     // Removes connection
+     const removeConnection = (e) => {
+        e.preventDefault()
+        axios.delete(`/api/tree/connection/${id}`).then((response) => {
+            fetchConnection()
+        }).catch(e => {
+            console.log('error in DELETE connection', e);
+            alert('something went wrong')
+        })
+     }
      
 
      return(
         <div>
-           
-            <Card sx={{minWidth: 300}}>
+           <Box sx={{width:'80%',
+            border: '2px solid black',}}>
+            <Card sx={{minWidth: 600}} component={Paper}>
                 <CardContent>
                     <Typography variant='h4'>
                         {personDetail.firstname} {personDetail.lastname}
                     </Typography>
                     <CardActions>
                         <Box display="flex" justifyContent="flex-end" alignItems="flex-end" >
-                            <Button variant="contained"><Link to={`/edit/${personDetail.id}`}>Edit</Link></Button>
+                            <Button  variant="contained"><Link to={`/edit/${personDetail.id}`}>Edit</Link></Button>
                         </Box>
                     </CardActions>
                     <Typography>
@@ -110,7 +122,8 @@ function DetailsPage(){
                     <Typography>
                         Connections: {
                             connection.map(connections =>(
-                                <p>{connections.firstname} is the  {connections.type} of {personDetail.firstname}</p>
+                                <p>{connections.firstname} is the  {connections.type} of {personDetail.firstname}<Button onClick={removeConnection} type='button' variant='contained' color='error' sx={{padding:'4px', margin:'2px'}}>Remove</Button></p>
+                                
                             ))
                         }
                     </Typography>
@@ -143,12 +156,12 @@ function DetailsPage(){
                         </Select>
                     </FormControl>
                     <Button onClick={addConnection} variant='contained' color='success' sx={{padding:'15px', margin:'2px'}}>Save</Button>
-                    <Button type='button' variant='contained' color='error' sx={{padding:'15px', margin:'2px'}}>Remove</Button>
                     </form>
                     
                 </CardContent>
                 
             </Card>
+        </Box>
 
 
         </div>

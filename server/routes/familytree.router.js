@@ -132,7 +132,8 @@ router.put('/:id', (req, res) => {
                         req.body.birth,
                         req.body.death,
                         req.body.birthplace,
-                        req.params.id])
+                        req.params.id,
+                        req.user.id])
       .then(results => {
         res.sendStatus(200)
       }).catch(error => {

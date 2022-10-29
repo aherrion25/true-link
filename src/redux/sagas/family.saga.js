@@ -32,7 +32,16 @@ function* addMember(action) {
             action.history.goBack()
         }
     } catch (error) {
-        console.log('ERROR IN POST FAMILY TREE');
+        console.log('ERROR IN POST FAMILY TREE',error);
+    }
+}
+
+function* addConnection(action){
+    try{
+        yield axios.post('/api/tree/connection',action.payload)
+        yield put({type: 'ADD_CONNECTION'})
+    } catch(error){
+        console.log('ERROR IN POST CONNECTION', error);
     }
 }
 
@@ -53,6 +62,7 @@ function* familySaga() {
     yield takeLatest('ADD_MEMBER', addMember);
     yield takeLatest('SET_DETAILS', fetchDetails);
     yield takeLatest('EDIT_PERSON', editPerson);
+    yield takeLatest('ADD_CONNECTION', addConnection);
 }
 
 export default familySaga;

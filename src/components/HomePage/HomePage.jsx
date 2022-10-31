@@ -91,6 +91,8 @@ useEffect(() => {
              
 
                     </div>
+                    <br />
+                    <br />
                     <div>
                         <TableContainer sx={{margin: '10px'}} component={Paper}>
                             <Table sx={{minWidth: 50}} size='small'>

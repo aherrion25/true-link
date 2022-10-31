@@ -91,7 +91,8 @@
   
   /* Change bg-color while hovering each item */
   .familytree li a:hover {
-    background-color: #EEF;
+    background-color: #962D3E;
+    color:white;
   }
   
   /* EXPERIMENTAL for multiple parents */

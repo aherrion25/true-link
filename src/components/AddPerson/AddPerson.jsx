@@ -65,7 +65,8 @@ const AddPerson = () => {
         display='flexbox'
         sx={{
             flexGrow: 1,
-            width:'100%',
+            background: 'white',
+            width:'30%',
             border: '2px solid black',
             '& .MuiTextField-root': { m: 1, width: '25ch' },   
         }}>

@@ -79,9 +79,8 @@ function DetailsPage(){
 
      return(
         <div>
-           <Box sx={{width:'80%',
-            border: '2px solid black',}}>
-            <Card sx={{minWidth: 600}} component={Paper}>
+           <Box sx={{width:'30%',}}>
+            <Card sx={{minWidth: 600, height:'50%'}} component={Paper}>
                 <CardContent>
                     <Typography variant='h4'>
                         {personDetail.firstname} {personDetail.lastname}
@@ -155,7 +154,7 @@ function DetailsPage(){
                         <MenuItem value={6}>Knox</MenuItem> 
                         </Select>
                     </FormControl>
-                    <Button onClick={addConnection} variant='contained' color='success' sx={{padding:'15px', margin:'2px'}}>Save</Button>
+                    <Button onClick={addConnection} variant='contained' color='success' sx={{padding:'5px', margin:'2px 5px'}}>Save</Button>
                     </form>
                     
                 </CardContent>

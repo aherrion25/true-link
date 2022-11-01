@@ -46,10 +46,13 @@ If you would like to name your database something else, you will need to change 
 [True Link ERD](https://dbdesigner.page.link/1TusVJ6rPE9sxAk87)
 
 ## ScreenShots
-
+## Home Page
 ![Screen Shot 2022-11-01 at 2 07 57 PM](https://user-images.githubusercontent.com/70453268/199317774-9f7dd0d2-dea6-4e02-8ae0-4b9b8b5688d5.png)
+## Add Family Member Page
 ![Screen Shot 2022-11-01 at 2 08 21 PM](https://user-images.githubusercontent.com/70453268/199317826-002a6951-27f4-401f-9919-bf5c39848d2d.png)
+## Details Page
 ![Screen Shot 2022-11-01 at 2 12 23 PM](https://user-images.githubusercontent.com/70453268/199318480-d17bc392-72d1-4b8e-bddc-c5a2dc082c70.png)
+## Edit Family Member Page
 ![Screen Shot 2022-11-01 at 2 12 55 PM](https://user-images.githubusercontent.com/70453268/199318548-bf5c1213-cbb8-473f-a59c-b6c30012725d.png)
 
 

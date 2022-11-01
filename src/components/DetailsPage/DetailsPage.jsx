@@ -105,14 +105,18 @@ function DetailsPage(){
                     <Typography>
                         Date of Birth: {formatBirthdate(personDetail.birth)}
                     </Typography>
-                    <Typography>
-                    Date of Death: {
-                            personDetail.death && formatDeathdate(
-                                (personDetail.death)
-                            )
-                        }
-                        
-                    </Typography>
+                    {
+                        personDetail.death && (
+                            <Typography>
+                                Date of Death: {
+                                    formatDeathdate(
+                                        (personDetail.death)
+                                    )
+                                }
+
+                            </Typography>
+                        )
+                    }
                         
                     <Typography>
                         Birth Place: {personDetail.birthplace}

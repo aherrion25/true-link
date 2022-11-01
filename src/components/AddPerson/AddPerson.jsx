@@ -63,9 +63,10 @@ const AddPerson = () => {
         display="flexbox"
         sx={{
             flexGrow: 1,
-            width:'100%',
+            width:'45%',
             border: '2px solid black',
-            '& .MuiTextField-root': { m: 1, width: '25ch' },   
+            '& .MuiTextField-root': { m: 1, width: '25ch' },
+            background:'white', 
         }}>
             <h3>{id ? 'Edit Family Member' : 'Add Family Member'}</h3>
             <br />

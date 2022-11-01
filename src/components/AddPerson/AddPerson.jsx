@@ -6,20 +6,11 @@ import Button from '@mui/material/Button';
 import axios from "axios";
 import { useParams,useHistory } from "react-router-dom";
 
-
-
 const AddPerson = () => {
     const dispatch = useDispatch();
-    const history = useHistory()
+    const history = useHistory();
+    // id is used for editing an existing person
     const {id} = useParams();
-    // const [firstname, setFirstName] = useState('');
-    // const [lastname, setLastName] = useState('');
-    // const [lastname_birth, setLastNameBirth] = useState('');
-    // const [gender, setGender] = useState('');
-    // const [birth, setBirth] = useState('');
-    // const [death, setDeath] = useState('');
-    // const [birthplace, setBirthPlace] = useState('');
-
 
     useEffect(() => {
         if(id){
@@ -31,10 +22,13 @@ const AddPerson = () => {
                 console.log(error);
                 alert('Something went wrong')
             })
+        } else {
+            // Adding a new person, nothing to fetch
         }
     },[id])
-    
-    const [newPerson, setNewPerson] = useState({
+
+    // Default properties for a new person
+    const defaultPerson = {
         firstname: "",
         lastname: "",
         lastname_birth: "",
@@ -42,7 +36,9 @@ const AddPerson = () => {
         birth: "",
         death: "",
         birthplace: ""
-    });
+    }
+    
+    const [newPerson, setNewPerson] = useState(defaultPerson);
 
     const handleChange = (key) => (event) => {
         setNewPerson({...newPerson, [key]: event.target.value,})
@@ -51,46 +47,55 @@ const AddPerson = () => {
     const addFamilyMember = (event) => {
         event.preventDefault()
         if(id){
-            dispatch({type:'EDIT_PERSON', payload: newPerson, history})
+            dispatch({type:'EDIT_PERSON', payload: newPerson, history, clearForm})
         } else {
-            dispatch({ type:'ADD_MEMBER', payload: newPerson, history})
+            dispatch({ type: 'ADD_MEMBER', payload: newPerson, history, clearForm})
         }
-        
-        setNewPerson({id:newPerson.id + 1, firstname: '', lastname: '', lastname_birth: '',
-    gender: '', birth: '', death: '', birthplace: ''});
     }
+
+    const clearForm = () => {
+        setNewPerson(defaultPerson);
+    }
+
     return(
         <Box 
         component="form"
-        display='flexbox'
+        display="flexbox"
         sx={{
             flexGrow: 1,
-            background: 'white',
-            width:'30%',
+            width:'100%',
             border: '2px solid black',
             '& .MuiTextField-root': { m: 1, width: '25ch' },   
         }}>
             <h3>{id ? 'Edit Family Member' : 'Add Family Member'}</h3>
             <br />
             <form onSubmit={addFamilyMember}>
-            <h4>First Name</h4><TextField required id={"firstname"} placeholder="first name" type='text' value={newPerson.firstname} onChange={handleChange('firstname')}  />
-            <br/>
-            <h4>Last Name</h4> <TextField required id={"lastname"} placeholder="last name" type='text' value={newPerson.lastname} onChange={handleChange('lastname')} />
-            <br/>
-            <h4>Birth Last Name</h4> <TextField id={"lastname_birth"} placeholder="birth last name" type='text' value={newPerson.lastname_birth} onChange={handleChange('lastname_birth')} />
-            <br/>
-            <h4>Gender</h4> <TextField id={"gender"} placeholder="gender" type='text' value={newPerson.gender} onChange={handleChange('gender')} />
-            <br/>
-            <h4>Date of Birth</h4> <TextField required id={"birth"} placeholder="Date of Birth" type='date' value={newPerson.birth} onChange={handleChange('birth')} />
-            <br/>
-            <h4>Date of Death</h4> <TextField id={"death"} placeholder="Date of Death"  type='date' value={newPerson.death} onChange={handleChange('death')} />
-            <br/>
-            <h4>Birthplace</h4> <TextField required id={"birthplace"} placeholder="Birthplace" type='text' value={newPerson.birthplace} onChange={handleChange('birthplace')} />
-            <br />
-            
-            <Box display="flex" justifyContent="flex-end" alignItems="flex-end" sx={{margin: '15px'}}>
-                 <Button type="submit" onClick={addFamilyMember} variant="contained">Submit</Button>
-            </Box>
+                <h4>First Name</h4>
+                <TextField
+                    required
+                    id={"firstname"}
+                    placeholder="first name"
+                    type='text'
+                    value={newPerson.firstname}
+                    onChange={handleChange('firstname')}
+                />
+                <br/>
+                <h4>Last Name</h4> <TextField required id={"lastname"} placeholder="last name" type='text' value={newPerson.lastname} onChange={handleChange('lastname')} />
+                <br/>
+                <h4>Birth Last Name</h4> <TextField id={"lastname_birth"} placeholder="birth last name" type='text' value={newPerson.lastname_birth} onChange={handleChange('lastname_birth')} />
+                <br/>
+                <h4>Gender</h4> <TextField id={"gender"} placeholder="gender" type='text' value={newPerson.gender} onChange={handleChange('gender')} />
+                <br/>
+                <h4>Date of Birth</h4> <TextField required id={"birth"} placeholder="Date of Birth" type='date' value={newPerson.birth} onChange={handleChange('birth')} />
+                <br/>
+                <h4>Date of Death</h4> <TextField id={"death"} placeholder="Date of Death"  type='date' value={newPerson.death} onChange={handleChange('death')} />
+                <br/>
+                <h4>Birthplace</h4> <TextField required id={"birthplace"} placeholder="Birthplace" type='text' value={newPerson.birthplace} onChange={handleChange('birthplace')} />
+                <br />
+                
+                <Box display="flex" justifyContent="flex-end" alignItems="flex-end" sx={{margin: '15px'}}>
+                    <Button type="submit" onClick={addFamilyMember} variant="contained">Submit</Button>
+                </Box>
             </form>
 
         </Box>

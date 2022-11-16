@@ -20,19 +20,6 @@
 
 This App helps the user build out a family tree. The user will also be able to edit and add family connections to each individual person in the family tree.
 
-## ERD
-[True Link ERD](https://dbdesigner.page.link/1TusVJ6rPE9sxAk87)
-
-## ScreenShots
-## Home Page
-![Screen Shot 2022-11-01 at 2 07 57 PM](https://user-images.githubusercontent.com/70453268/199317774-9f7dd0d2-dea6-4e02-8ae0-4b9b8b5688d5.png)
-## Add Family Member Page
-![Screen Shot 2022-11-01 at 2 08 21 PM](https://user-images.githubusercontent.com/70453268/199317826-002a6951-27f4-401f-9919-bf5c39848d2d.png)
-## Details Page
-![Screen Shot 2022-11-01 at 2 12 23 PM](https://user-images.githubusercontent.com/70453268/199318480-d17bc392-72d1-4b8e-bddc-c5a2dc082c70.png)
-## Edit Family Member Page
-![Screen Shot 2022-11-01 at 2 12 55 PM](https://user-images.githubusercontent.com/70453268/199318548-bf5c1213-cbb8-473f-a59c-b6c30012725d.png)
-
 ## Built With
 
 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg" height="40px" width="40px" /></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" height="40px" width="40px" /></a><a href="https://jquery.com/"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/jquery/jquery-original.svg" height="40px" width="40px" /></a><a href="https://material-ui.com/"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/materialui/materialui-original.svg" height="40px" width="40px" /></a><a href="https://www.postgresql.org/"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original.svg" height="40px" width="40px" /></a><a href="https://reactjs.org/"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" height="40px" width="40px" /></a><a href="https://redux.js.org/"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redux/redux-original.svg" height="40px" width="40px" /></a>
@@ -82,6 +69,18 @@ Before you get started, make sure you have the following software installed on y
 5. details page also allows user to edit the specific person when clicking edit button
 6. When adding connections the corresponding connection will add the member to the family tree i.e. (parent will be above child, spouse will be next to each other)
 
+## ERD
+[True Link ERD](https://dbdesigner.page.link/1TusVJ6rPE9sxAk87)
+
+## ScreenShots
+## Home Page
+![Screen Shot 2022-11-01 at 2 07 57 PM](https://user-images.githubusercontent.com/70453268/199317774-9f7dd0d2-dea6-4e02-8ae0-4b9b8b5688d5.png)
+## Add Family Member Page
+![Screen Shot 2022-11-01 at 2 08 21 PM](https://user-images.githubusercontent.com/70453268/199317826-002a6951-27f4-401f-9919-bf5c39848d2d.png)
+## Details Page
+![Screen Shot 2022-11-01 at 2 12 23 PM](https://user-images.githubusercontent.com/70453268/199318480-d17bc392-72d1-4b8e-bddc-c5a2dc082c70.png)
+## Edit Family Member Page
+![Screen Shot 2022-11-01 at 2 12 55 PM](https://user-images.githubusercontent.com/70453268/199318548-bf5c1213-cbb8-473f-a59c-b6c30012725d.png)
 
 ## License
 
